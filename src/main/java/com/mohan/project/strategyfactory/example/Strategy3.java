@@ -1,12 +1,12 @@
 package com.mohan.project.strategyfactory.example;
 
-import com.mohan.project.strategyfactory.core.ThreeArgStrategy;
+import com.mohan.project.strategyfactory.core.AbstractThreeArgStrategy;
 
 /**
  * @author mohan
  * @since 2020-10-12 09:37
  */
-public class Strategy3 implements ThreeArgStrategy<String, String, String, Integer> {
+public class Strategy3 extends AbstractThreeArgStrategy<String, String, String, Integer> {
 
     @Override
     public String handle(String param1, String param2, Integer param3) {

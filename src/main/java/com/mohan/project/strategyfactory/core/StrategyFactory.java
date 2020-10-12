@@ -11,116 +11,116 @@ import java.util.Optional;
  */
 public final class StrategyFactory {
 
-    private static final Map<String, OneArgStrategy> CLASS_NAME_ONE_ARG_STRATEGY_MAP = Maps.newConcurrentMap();
-    private static final Map<String, OneArgStrategy> ID_ONE_ARG_STRATEGY_MAP = Maps.newConcurrentMap();
+    private static final Map<String, AbstractOneArgStrategy> CLASS_NAME_ONE_ARG_STRATEGY_MAP = Maps.newConcurrentMap();
+    private static final Map<String, AbstractOneArgStrategy> ID_ONE_ARG_STRATEGY_MAP = Maps.newConcurrentMap();
     
     
-    private static final Map<String, TwoArgStrategy> CLASS_NAME_TWO_ARG_STRATEGY_MAP = Maps.newConcurrentMap();
-    private static final Map<String, TwoArgStrategy> ID_TWO_ARG_STRATEGY_MAP = Maps.newConcurrentMap();
+    private static final Map<String, AbstractTwoArgStrategy> CLASS_NAME_TWO_ARG_STRATEGY_MAP = Maps.newConcurrentMap();
+    private static final Map<String, AbstractTwoArgStrategy> ID_TWO_ARG_STRATEGY_MAP = Maps.newConcurrentMap();
     
     
-    private static final Map<String, ThreeArgStrategy> CLASS_NAME_THREE_ARG_STRATEGY_MAP = Maps.newConcurrentMap();
-    private static final Map<String, ThreeArgStrategy> ID_THREE_ARG_STRATEGY_MAP = Maps.newConcurrentMap();
+    private static final Map<String, AbstractThreeArgStrategy> CLASS_NAME_THREE_ARG_STRATEGY_MAP = Maps.newConcurrentMap();
+    private static final Map<String, AbstractThreeArgStrategy> ID_THREE_ARG_STRATEGY_MAP = Maps.newConcurrentMap();
 
-    public static void registerOneArg(OneArgStrategy strategy) {
+    public static void registerOneArg(AbstractOneArgStrategy strategy) {
         String name = strategy.getClass().getName();
         CLASS_NAME_ONE_ARG_STRATEGY_MAP.put(name, strategy);
         String id = strategy.generate();
-        OneArgStrategy oneArgStrategy = ID_ONE_ARG_STRATEGY_MAP.get(id);
+        AbstractOneArgStrategy oneArgStrategy = ID_ONE_ARG_STRATEGY_MAP.get(id);
         if(oneArgStrategy != null) {
             throw new DuplicateException(oneArgStrategy.getClass().getName(), strategy.getClass().getName());
         }
         ID_ONE_ARG_STRATEGY_MAP.put(id, strategy);
     }
 
-    public static <T extends OneArgStrategy> Optional<T> getOneArgStrategyByClass(Class<T> strategyClass) {
+    public static <T extends AbstractOneArgStrategy> Optional<T> getOneArgStrategyByClass(Class<T> strategyClass) {
         boolean valid = valid(strategyClass);
         if (!valid) {
             return Optional.empty();
         }
-        OneArgStrategy oneArgStrategy = CLASS_NAME_ONE_ARG_STRATEGY_MAP.get(strategyClass.getName());
+        AbstractOneArgStrategy oneArgStrategy = CLASS_NAME_ONE_ARG_STRATEGY_MAP.get(strategyClass.getName());
         if (oneArgStrategy == null) {
             return Optional.empty();
         }
         return Optional.of((T) oneArgStrategy);
     }
 
-    public static <T extends OneArgStrategy> Optional<T> getOneArgStrategyById(String id) {
+    public static <T extends AbstractOneArgStrategy> Optional<T> getOneArgStrategyById(String id) {
         boolean valid = valid(id);
         if (!valid) {
             return Optional.empty();
         }
-        OneArgStrategy oneArgStrategy = ID_ONE_ARG_STRATEGY_MAP.get(id);
+        AbstractOneArgStrategy oneArgStrategy = ID_ONE_ARG_STRATEGY_MAP.get(id);
         if (oneArgStrategy == null) {
             return Optional.empty();
         }
         return Optional.of((T) oneArgStrategy);
     }
 
-    public static void registerTwoArg(TwoArgStrategy strategy) {
+    public static void registerTwoArg(AbstractTwoArgStrategy strategy) {
         String name = strategy.getClass().getName();
         CLASS_NAME_TWO_ARG_STRATEGY_MAP.put(name, strategy);
         String id = strategy.generate();
-        TwoArgStrategy twoArgStrategy = ID_TWO_ARG_STRATEGY_MAP.get(id);
+        AbstractTwoArgStrategy twoArgStrategy = ID_TWO_ARG_STRATEGY_MAP.get(id);
         if(twoArgStrategy != null) {
             throw new DuplicateException(twoArgStrategy.getClass().getName(), strategy.getClass().getName());
         }
         ID_TWO_ARG_STRATEGY_MAP.put(strategy.generate(), strategy);
     }
 
-    public static <T extends TwoArgStrategy> Optional<T> getTwoArgStrategyByClass(Class<T> strategyClass) {
+    public static <T extends AbstractTwoArgStrategy> Optional<T> getTwoArgStrategyByClass(Class<T> strategyClass) {
         boolean valid = valid(strategyClass);
         if (!valid) {
             return Optional.empty();
         }
-        TwoArgStrategy twoArgStrategy = CLASS_NAME_TWO_ARG_STRATEGY_MAP.get(strategyClass.getName());
+        AbstractTwoArgStrategy twoArgStrategy = CLASS_NAME_TWO_ARG_STRATEGY_MAP.get(strategyClass.getName());
         if (twoArgStrategy == null) {
             return Optional.empty();
         }
         return Optional.of((T) twoArgStrategy);
     }
 
-    public static <T extends TwoArgStrategy> Optional<T> getTwoArgStrategyById(String id) {
+    public static <T extends AbstractTwoArgStrategy> Optional<T> getTwoArgStrategyById(String id) {
         boolean valid = valid(id);
         if (!valid) {
             return Optional.empty();
         }
-        TwoArgStrategy twoArgStrategy = ID_TWO_ARG_STRATEGY_MAP.get(id);
+        AbstractTwoArgStrategy twoArgStrategy = ID_TWO_ARG_STRATEGY_MAP.get(id);
         if (twoArgStrategy == null) {
             return Optional.empty();
         }
         return Optional.of((T) twoArgStrategy);
     }
 
-    public static void registerThreeArg(ThreeArgStrategy strategy) {
+    public static void registerThreeArg(AbstractThreeArgStrategy strategy) {
         String name = strategy.getClass().getName();
         CLASS_NAME_THREE_ARG_STRATEGY_MAP.put(name, strategy);
         String id = strategy.generate();
-        ThreeArgStrategy threeArgStrategy = ID_THREE_ARG_STRATEGY_MAP.get(id);
+        AbstractThreeArgStrategy threeArgStrategy = ID_THREE_ARG_STRATEGY_MAP.get(id);
         if(threeArgStrategy != null) {
             throw new DuplicateException(threeArgStrategy.getClass().getName(), strategy.getClass().getName());
         }
         ID_THREE_ARG_STRATEGY_MAP.put(strategy.generate(), strategy);
     }
 
-    public static <T extends ThreeArgStrategy> Optional<T> getThreeArgStrategyByClass(Class<T> strategyClass) {
+    public static <T extends AbstractThreeArgStrategy> Optional<T> getThreeArgStrategyByClass(Class<T> strategyClass) {
         boolean valid = valid(strategyClass);
         if (!valid) {
             return Optional.empty();
         }
-        ThreeArgStrategy threeArgStrategy = CLASS_NAME_THREE_ARG_STRATEGY_MAP.get(strategyClass.getName());
+        AbstractThreeArgStrategy threeArgStrategy = CLASS_NAME_THREE_ARG_STRATEGY_MAP.get(strategyClass.getName());
         if (threeArgStrategy == null) {
             return Optional.empty();
         }
         return Optional.of((T) threeArgStrategy);
     }
 
-    public static <T extends ThreeArgStrategy> Optional<T> getThreeArgStrategyById(String id) {
+    public static <T extends AbstractThreeArgStrategy> Optional<T> getThreeArgStrategyById(String id) {
         boolean valid = valid(id);
         if (!valid) {
             return Optional.empty();
         }
-        ThreeArgStrategy threeArgStrategy = ID_THREE_ARG_STRATEGY_MAP.get(id);
+        AbstractThreeArgStrategy threeArgStrategy = ID_THREE_ARG_STRATEGY_MAP.get(id);
         if (threeArgStrategy == null) {
             return Optional.empty();
         }

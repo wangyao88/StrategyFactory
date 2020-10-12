@@ -42,27 +42,27 @@ public final class StrategyManager {
 
     private static void registerOneArg(String path) throws Exception {
         Reflections reflections = new Reflections(path);
-        Set<Class<? extends OneArgStrategy>> strategyClasses = reflections.getSubTypesOf(OneArgStrategy.class);
-        for (Class<? extends OneArgStrategy> strategyClass : strategyClasses) {
-            OneArgStrategy strategy = strategyClass.newInstance();
+        Set<Class<? extends AbstractOneArgStrategy>> strategyClasses = reflections.getSubTypesOf(AbstractOneArgStrategy.class);
+        for (Class<? extends AbstractOneArgStrategy> strategyClass : strategyClasses) {
+            AbstractOneArgStrategy strategy = strategyClass.newInstance();
             StrategyFactory.registerOneArg(strategy);
         }
     }
 
     private static void registerTwoArg(String path) throws Exception {
         Reflections reflections = new Reflections(path);
-        Set<Class<? extends TwoArgStrategy>> strategyClasses = reflections.getSubTypesOf(TwoArgStrategy.class);
-        for (Class<? extends TwoArgStrategy> strategyClass : strategyClasses) {
-            TwoArgStrategy strategy = strategyClass.newInstance();
+        Set<Class<? extends AbstractTwoArgStrategy>> strategyClasses = reflections.getSubTypesOf(AbstractTwoArgStrategy.class);
+        for (Class<? extends AbstractTwoArgStrategy> strategyClass : strategyClasses) {
+            AbstractTwoArgStrategy strategy = strategyClass.newInstance();
             StrategyFactory.registerTwoArg(strategy);
         }
     }
 
     private static void registerThreeArg(String path) throws Exception {
         Reflections reflections = new Reflections(path);
-        Set<Class<? extends ThreeArgStrategy>> strategyClasses = reflections.getSubTypesOf(ThreeArgStrategy.class);
-        for (Class<? extends ThreeArgStrategy> strategyClass : strategyClasses) {
-            ThreeArgStrategy strategy = strategyClass.newInstance();
+        Set<Class<? extends AbstractThreeArgStrategy>> strategyClasses = reflections.getSubTypesOf(AbstractThreeArgStrategy.class);
+        for (Class<? extends AbstractThreeArgStrategy> strategyClass : strategyClasses) {
+            AbstractThreeArgStrategy strategy = strategyClass.newInstance();
             StrategyFactory.registerThreeArg(strategy);
         }
     }

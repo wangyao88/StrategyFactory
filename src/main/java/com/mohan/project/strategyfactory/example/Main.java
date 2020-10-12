@@ -26,5 +26,9 @@ class Main {
         StrategyFactory.getOneArgStrategyById("Strategy1").ifPresent(strategy1 -> {
             System.out.println(strategy1.handle("qweqwe"));
         });
+
+        StrategyFactory.getTwoArgStrategyById("Strategy2").ifPresent(strategy2 -> {
+            System.out.println(strategy2.handle("qq ", 1));
+        });
     }
 }
